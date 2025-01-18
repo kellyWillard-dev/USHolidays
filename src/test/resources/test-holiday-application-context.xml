@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd">
+  
+	<!-- -->
+	<context:annotation-config/>
+	<context:component-scan base-package="org.wrk.date"/>
+	
+	<!-- All federal Holidays
+	<value>CHRISTMAS_DAY</value>
+	<value>COLUMBUS_DAY</value>
+	<value>INDEPENDENCE_DAY</value>
+	<value>JUNETEENTH_DAY</value>
+	<value>LABOR_DAY</value>
+	<value>MARTINLUTHERKINGJR_DAY</value>
+	<value>MEMORIAL_DAY</value>
+	<value>NEWYEARS_DAY</value>
+	<value>PRESIDENTS_DAY</value>
+	<value>THANKSGIVING_DAY</value>
+	<value>VETERANS_DAY</value>
+	-->
+
+	<util:set id="corpUnobservedHolidays" value-type="java.lang.String">
+		<value>COLUMBUS_DAY</value>
+		<value>JUNETEENTH_DAY</value>
+		<value>MARTINLUTHERKINGJR_DAY</value>
+		<value>PRESIDENTS_DAY</value>
+		<value>VETERANS_DAY</value>
+	</util:set>
+	
+	<!-- Holiday beans -->
+	
+	<!-- -->
+	<bean id="corpHolidays" class="org.wrk.date.holiday.ObservedHolidays" init-method="init">
+		<property name="unobserved" ref="corpUnobservedHolidays"/>
+	</bean>  
+	
+	<bean id="federalHolidays" class="org.wrk.date.holiday.FederalHolidays" init-method="init" />
+	
+	<!-- -->
+	<bean id="observedHolidays" class="org.wrk.date.holiday.ObservedHolidays" init-method="init" />  
+	
+	<!-- -->
+	<bean id="frbHolidays" class="org.wrk.date.holiday.ObservedHolidays" init-method="init">
+		<property name="saturdayObservable" value="false"/>
+	</bean>  
+</beans>
