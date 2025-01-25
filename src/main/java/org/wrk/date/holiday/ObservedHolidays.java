@@ -57,7 +57,7 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	 */
 	public ObservedHolidays clone(int iyear) {
 		// Validate year value.  If invalid year, default to current year.
-		iyear = 0 < iyear && iyear < USHoliday.MAXIMUM_YEAR ? iyear : this.getYear();
+		iyear = 0 < iyear && iyear < MAXIMUM_YEAR ? iyear : this.getYear();
 		
 		ObservedHolidays response = new ObservedHolidays(iyear);
 		

@@ -61,7 +61,7 @@ import java.util.Date;
  */
 public class USHoliday {
 
-	public static int MAXIMUM_YEAR = Calendar.getInstance().getActualMaximum(Calendar.YEAR);
+	protected final int MAXIMUM_YEAR = Calendar.getInstance().getActualMaximum(Calendar.YEAR);
 	
 	private final int NEXT = 1;
 	
