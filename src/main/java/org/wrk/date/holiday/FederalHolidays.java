@@ -104,7 +104,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 
 	/**
-	 * <p>Calculate all federal holidays for the year and load them into the holiday list.</p>
+	 * <p>Calculate all federal holidays for the year and load them into the holiday set.</p>
 	 */
 	private void loadHolidays() {
 		Stream.of(HolidayEnum.values()).forEach(it -> {
