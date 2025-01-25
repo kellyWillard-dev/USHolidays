@@ -2,7 +2,6 @@ package org.wrk.date.holiday;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Optional;
@@ -30,7 +29,7 @@ import java.util.stream.Stream;
  * @author Kelly Willard
  */
 public class FederalHolidays extends USHoliday implements HolidayRules {
-	private SortedSet<Holiday> holidaySet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
+	private SortedSet<Holiday> holidaySet = new TreeSet<>(Comparator.comparing(Holiday::getDay));
 	
 	private boolean saturdayObservable = true;
 	
@@ -209,6 +208,12 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	 * @return String[] - format "<Date: format "EEEEE MM-dd-yyyy"> <Holiday Enum> <Holiday Name> <Observable flag>"
 	 */
 	public String[] toHolidays() {
+		// Create a holiday set that will be sorted by date, not by day.
+		SortedSet<Holiday> holidaySet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
+		
+		// Add the holidays to the new tree set.
+		this.getHolidaySet().forEach(it -> holidaySet.add(it));
+		
 		String[] result = new String[holidaySet.size()];
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEEE MM-dd-yyyy");
