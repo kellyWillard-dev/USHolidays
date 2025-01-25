@@ -77,6 +77,13 @@ public class TestFederalHolidays {
 	}
 	
 	@Test
+	public void testHolidayOrder() {
+		for(String line :this.getFederalHolidays().toHolidays()) {
+			System.out.println(line);
+		}
+	}
+	
+	@Test
 	public void testIndependenceDay() {
 		try {
 			assertTrue(this.getFederalHolidays().isHoliday(this.getFederalHolidays().getIndependenceDay()),"Independence day not observed.");
