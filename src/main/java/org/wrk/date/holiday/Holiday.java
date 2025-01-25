@@ -12,7 +12,7 @@ import java.util.Calendar;
  * <p></p>
  * @author Kelly Willard
  */
-public class Holiday implements Comparable<Holiday> {
+public class Holiday {
 
 	private Calendar date;
 	
@@ -24,21 +24,6 @@ public class Holiday implements Comparable<Holiday> {
 	 * constructor
 	 */
 	public Holiday() {
-	}
-
-	/**
-	 * <p>
-	 * Compare the day.
-	 * <h4>Returns:</h4>
-	 * <li>0 = days match
-	 * <li>-1 = parameter day is less than
-	 * <li>1 = parameter day is greater than
-	 * </p>
-	 * @return int value. 
-	 */
-	@Override
-	public int compareTo(Holiday holiday) {
-		return this.getDay().compareTo(holiday.getDay());
 	}
 
 	/**
