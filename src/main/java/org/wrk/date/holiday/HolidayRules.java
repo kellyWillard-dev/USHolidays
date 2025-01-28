@@ -39,8 +39,8 @@ public interface HolidayRules {
 	 * the observed flag is set to false, indicating actual day.</p>
 	 * <p>Observable holidays indicate whether or not to observe a holiday on another day if it occurs on a weekend.<br/>
 	 * Traditionally, Saturday holidays observe on the prior Friday and Sunday holidays on the following Monday.</p>
-	 * @param date
-	 * @param day
+	 * @param date value for the created Holiday.
+	 * @param day HolidayEnum value for the created Holiday.
 	 * @return Holiday if valid parameters exist else null.
 	 */
 	default public Holiday createHoliday(Calendar date, HolidayEnum day) {
@@ -76,8 +76,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the day an actual holiday?<br/>An actual holiday can occur any day of the week.</p>
-	 * @param day
-	 * @return true if day is an actual holiday else false.
+	 * @param day HolidayEnum value.
+	 * @return boolean true if day is an actual holiday else false.
 	 */
 	default public boolean isActualDay(HolidayEnum day) {
 		return day != null ? day == HolidayEnum.CHRISTMAS_DAY || day == HolidayEnum.INDEPENDENCE_DAY || day == HolidayEnum.JUNETEENTH_DAY || day == HolidayEnum.NEWYEARS_DAY || day == HolidayEnum.VETERANS_DAY : false;
@@ -85,8 +85,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the day a valid enumerated holiday?</p>
-	 * @param day
-	 * @return true if day is within the HolidayEnum list else false.
+	 * @param day HolidayEnum value.
+	 * @return boolean true if day is within the HolidayEnum list else false.
 	 */
 	default public boolean isEnumeratedHoliday(HolidayEnum day) {
 		Optional<HolidayEnum> holiday = day != null ? Stream.of(HolidayEnum.values()).filter(it -> it == day).findFirst() : Optional.empty();
@@ -96,8 +96,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the date Monday</p>
-	 * @param date
-	 * @return true if date is Monday else false.
+	 * @param date value to be determined.
+	 * @return boolean true if date is Monday else false.
 	 */
 	default public boolean isMonday(Calendar date) {
 		return date != null ? date.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY : false;
@@ -105,8 +105,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Does the date occur on New Years Eve?</p>
-	 * @param date
-	 * @return true if date is New Years Eve else false.
+	 * @param newYearsEve Holiday containing the date value to check.
+	 * @return boolean true if date is New Years Eve else false.
 	 */
 	default public boolean isNewYearsEve(Holiday newYearsEve) {
 		return newYearsEve != null && newYearsEve.getDate() != null ? newYearsEve.getDate().get(Calendar.MONTH) == Calendar.DECEMBER && newYearsEve.getDate().get(Calendar.DAY_OF_MONTH) == 31 : false;		
@@ -114,8 +114,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the date Saturday and observable?</p>
-	 * @param date
-	 * @return true if date is Saturday and observable else false.
+	 * @param date value to be determined.
+	 * @return boolean true if date is Saturday and observable else false.
 	 */
 	default public boolean isObservableOnSaturday(Calendar date) {
 		return this.isSaturday(date) && this.isSaturdayObservable();
@@ -123,8 +123,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the date Sunday and observable?</p>
-	 * @param date
-	 * @return true if date is Sunday and observable else false.
+	 * @param date value to be determined.
+	 * @return boolean true if date is Sunday and observable else false.
 	 */
 	default public boolean isObservableOnSunday(Calendar date) {
 		return this.isSunday(date) && this.isSundayObservable();
@@ -132,8 +132,8 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Is the date Saturday?</p>
-	 * @param date
-	 * @return true if date is Saturday else false.
+	 * @param date value to be determined.
+	 * @return boolean true if date is Saturday else false.
 	 */
 	default public boolean isSaturday(Calendar date) {
 		return date != null ? date.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY : false;
@@ -141,14 +141,14 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Are holidays Saturday observable?</p>
-	 * @return saturdayObservable flag.
+	 * @return saturdayObservable boolean set to either true or false.
 	 */
 	public boolean isSaturdayObservable();
 	
 	/**
 	 * <p>Is the date Sunday?</p>
-	 * @param date
-	 * @return true if date is Sunday else false.
+	 * @param date value to be determined.
+	 * @return boolean true if date is Sunday else false.
 	 */
 	default public boolean isSunday(Calendar date) {
 		return date != null ? date.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY : false;
@@ -156,26 +156,26 @@ public interface HolidayRules {
 	
 	/**
 	 * <p>Are holidays Sunday observable?</p>
-	 * @return sundayObservable flag.
+	 * @return sundayObservable boolean set to either true or false.
 	 */
 	public boolean isSundayObservable();
 	
 	/**
 	 * <p>Set Saturday observable flag.</p>
-	 * @param saturdayObservable
+	 * @param saturdayObservable boolean set to either true or false.
 	 */
 	public void setSaturdayObservable(boolean saturdayObservable);
 	
 	/**
 	 * <p>Set Sunday observable flag.</p>
-	 * @param sundayObservable
+	 * @param sundayObservable boolean set to either true or false.
 	 */
 	public void setSundayObservable(boolean sundayObservable);
 	
 	/**
 	 * <p>Does the date occur on a weekend?</p>
-	 * @param date
-	 * @return true if weekend date else false.
+	 * @param date value to be determined.
+	 * @return boolean true if weekend date else false.
 	 */
 	default public boolean isWeekEnd(Calendar date) {
 		return this.isSaturday(date) || this.isSunday(date);

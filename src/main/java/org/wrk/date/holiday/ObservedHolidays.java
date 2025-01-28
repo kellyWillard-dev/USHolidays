@@ -11,25 +11,10 @@ import java.util.Set;
  * <li>holidayUnobserved - add a holiday to the unobserved set.
  * <li>isUnobserved - returns true if the holiday has been made unobserved else false.
  * <br/><br/>
- * <h4>Remove Holiday</h4>
- * <p>Remove a holiday from observance by specifying the name of the holiday from the list below to the holidayUnobserved method.</p>
+ * <h4>Unobserve Holiday</h4>
+ * <p>Remove a holiday from observance by specifying the name of the holiday to the <b><i>holidayUnobserved()</i></b> method.<br/>
+ * The HolidayEnum Enumerations List provides all the valid holiday names.</p>
  * <br/>
- * <table>
- * <caption><b>Holiday Names</b></caption>
- * <tr></tr>
- * <tr><td>CHRISTMAS_DAY</td></tr>
- * <tr><td>COLUMBUS_DAY</td></tr>
- * <tr><td>INDEPENDENCE_DAY</td></tr>
- * <tr><td>JUNETEENTH_DAY</td></tr>
- * <tr><td>LABOR_DAY</td></tr>
- * <tr><td>MARTINLUTHERKINGJR_DAY</td></tr>
- * <tr><td>MEMORIAL_DAY</td></tr>
- * <tr><td>NEWYEARS_DAY</td></tr>
- * <tr><td>PRESIDENTS_DAY</td></tr>
- * <tr><td>THANKSGIVING_DAY</td></tr>
- * <tr><td>VETERANS_DAY</td></tr>
- * </table>
- * <p></p>
  * @see org.wrk.date.holiday.FederalHolidays
  * @author Kelly Willard
  */
@@ -45,21 +30,22 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 
 	/**
 	 * <p>constructor w/param</p>
+	 * @param year specified as an int value greater than 0 and less than MAXIMUM_YEAR.
 	 */
 	public ObservedHolidays(int year) {
 		super(year);
 	}
 
 	/**
-	 * <p>Clone the ObservedHolidays class.</p>
-	 * @param iyear
+	 * <p>Clone the ObservedHolidays class for any specifed year.</p>
+	 * @param year specified as an int value greater than 0 and less than MAXIMUM_YEAR.
 	 * @return ObservedHolidays
 	 */
-	public ObservedHolidays clone(int iyear) {
+	public ObservedHolidays clone(int year) {
 		// Validate year value.  If invalid year, default to current year.
-		iyear = 0 < iyear && iyear < MAXIMUM_YEAR ? iyear : this.getYear();
+		year = 0 < year && year < MAXIMUM_YEAR ? year : this.getYear();
 		
-		ObservedHolidays response = new ObservedHolidays(iyear);
+		ObservedHolidays response = new ObservedHolidays(year);
 		
 		// Clone the set of unobserved holiday names.
 		response.setUnobserved(this.getUnobserved());
@@ -78,7 +64,7 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	
 	/**
 	 * <p>Get the set of unobserved holidays.</p>
-	 * @return the unobserved set
+	 * @return the unobserved set.
 	 */
 	private Set<String> getUnobserved() {
 		return unobserved;
@@ -86,10 +72,10 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	
 	/**
 	 * <p>Add a holiday to the unobserved set.</p>
-	 * 
-	 * @param holidayName in HolidayEnum format.
+	 * @param holidayName String value from the Enumerations List in HolidayEnum.
 	 * @return true if holiday is unobserved else false.
 	 * @throws Exception if parameter is an invalid holiday name.
+	 * @see org.wrk.date.holiday.HolidayEnum
 	 */
 	public boolean holidayUnobserved(String holidayName) throws Exception {
 		boolean response = false;
@@ -107,8 +93,7 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 		
 	/**
 	 * <p>Does the calendar date match a holiday?</p>
-	 * <p></p>
-	 * @param date
+	 * @param date to determine if holiday.
 	 * @return true if holiday else false.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
@@ -118,7 +103,7 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 
 	/**
 	 * <p>Does the calendar date match a holiday?</p>
-	 * @param date
+	 * @param date to determine if holiday.
 	 * @return true if holiday else false.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
@@ -128,8 +113,9 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	
 	/**
 	 * <p>Is the holiday in the unobserved set?</p>
-	 * @param holidayName
+	 * @param holidayName String value from the Enumerations List in HolidayEnum.
 	 * @return true if holiday name is in the unobserved set else false.
+	 * @see org.wrk.date.holiday.HolidayEnum
 	 */
 	public boolean isUnobserved(String holidayName) {
 		return this.getUnobserved().contains(holidayName);
@@ -146,14 +132,14 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	
 	/**
 	 * <p>List all observed holidays, excluding the unobserved.</p>
-	 * @return String[]
-	 * @see org.wrk.date.holiday.FederalHolidays
+	 * @return String[] array of all observed holidays.
+	 * @see org.wrk.date.holiday.USHoliday
 	 */
 	public String[] toHolidays() {
 		// Get the holidays.
 		String[] lines = super.toHolidays();
 		
-		//  Return value.
+		// Create response array suited for all holidays minus unobserved.
 		String[] response = new String[lines.length - this.getUnobserved().size()];
 		
 		int index = 0;
@@ -174,20 +160,18 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 
 	/**
 	 * <p>Which holiday does the calendar date match?</p>
-	 * @param date
+	 * @param date to determine which holiday.
 	 * @return Holiday if date matches the holiday date else null.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
 	public Holiday whichHoliday(Calendar date) throws Exception {
 		// Determine which holiday.
 		Holiday holiday = super.whichHoliday(date);
-		// Is the date a holiday?
-		if(holiday != null) {
-			// Is the holiday observed?
-			if(this.isUnobserved(holiday.getDay().name())) {
-				// The holiday is not observed.
-				holiday = null;
-			}			
+		
+		// Is the date a holiday and is the holiday observed?
+		if(holiday != null && this.isUnobserved(holiday.getDay().name())) {
+			// The holiday is not observed.
+			holiday = null;
 		}
 		
 		return holiday;
@@ -195,20 +179,18 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	
 	/**
 	 * <p>Which holiday does the calendar date match?</p>
-	 * @param date
+	 * @param date to determine which holiday.
 	 * @return Holiday if date matches the holiday date else null.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
 	public Holiday whichHoliday(Date date) throws Exception {
 		// Determine which holiday.
 		Holiday holiday = super.whichHoliday(date);
-		// Is the date a holiday?
-		if(holiday != null) {
-			// Is the holiday not observed?
-			if(this.isUnobserved(holiday.getDay().name())) {
-				// The holiday is not observed.
-				holiday = null;
-			}			
+		
+		// Is the date a holiday and is the holiday observed?
+		if(holiday != null && this.isUnobserved(holiday.getDay().name())) {
+			// The holiday is not observed.
+			holiday = null;
 		}
 		
 		return holiday;

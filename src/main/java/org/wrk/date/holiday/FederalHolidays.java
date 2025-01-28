@@ -22,10 +22,11 @@ import java.util.stream.Stream;
  * <li>sundayObservable if set true indicates a holiday occurring on a Sunday will be observed on the following Monday.
  * <br/><br/>The Observable values <b><i>default to true</i></b>.  If set false, the holiday is not observed.<br/><br/>
  * </p>
- * @see org.wrk.date.holiday.USHoliday
- * @see org.wrk.date.holiday.HolidayRules
- * @see org.wrk.date.holiday.HolidayEnum
  * @see org.wrk.date.holiday.Holiday
+ * @see org.wrk.date.holiday.HolidayEnum
+ * @see org.wrk.date.holiday.HolidayRules
+ * @see org.wrk.date.holiday.USHoliday
+ * 
  * @author Kelly Willard
  */
 public class FederalHolidays extends USHoliday implements HolidayRules {
@@ -42,25 +43,25 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 
 	/**
-	 * <p>constructor w/param</p>
+	 * <p>constructor</p>
+	 * @param year specified as an int value greater than 0 and less than MAXIMUM_YEAR.
 	 */
 	public FederalHolidays(int year) {
 		super(year);
 	}
 
 	/**
-	 * @return the holidaySet
+	 * @return holidaySet as a SortedSet.
 	 */
 	private SortedSet<Holiday> getHolidaySet() {
 		return holidaySet;
 	}
 	
 	/**
-	 * <p>Initialize the FederalHolidays class.
+	 * <p>Initialize the FederalHolidays class.</p>
 	 * <li>Calls the loadHolidays method.
 	 * <li>Call this method after instantiating this class.
 	 * <li>Call this method within an init-method setting for dependency injection.
-	 * </p>
 	 */
 	public void init() {
 		this.loadHolidays();
@@ -68,8 +69,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	
 	/**
 	 * <p>Does the calendar date match a holiday?</p>
-	 * <p></p>
-	 * @param date
+	 * @param date to determine if holiday.
 	 * @return true if holiday else false.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
@@ -79,7 +79,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 
 	/**
 	 * <p>Does the calendar date match a holiday?</p>
-	 * @param date
+	 * @param date to determine if holiday.
 	 * @return true if holiday else false.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
@@ -88,7 +88,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 
 	/**
-	 * <p>Are holidays occurring of a Saturday observable?</p>
+	 * <p>Are holidays occurring on a Saturday observable?</p>
 	 */
 	@Override
 	public boolean isSaturdayObservable() {
@@ -96,7 +96,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 
 	/**
-	 * <p>Are holidays occurring of a Sunday observable?</p>
+	 * <p>Are holidays occurring on a Sunday observable?</p>
 	 */
 	@Override
 	public boolean isSundayObservable() {
@@ -104,7 +104,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 
 	/**
-	 * <p>Calculate all federal holidays for the year and load them into the holiday set.</p>
+	 * <p>Calculate all federal holidays for the year and loads them into the holiday set.</p>
 	 */
 	private void loadHolidays() {
 		Stream.of(HolidayEnum.values()).forEach(it -> {
@@ -158,8 +158,8 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	}
 	
 	/**
-	 * <p>Anticipate the possibility that New Years Eve may be a holiday.</p>
-	 * @return Holiday if New Years Eve else null.
+	 * <p>Anticipate the possibility that New Years Eve may be a holiday in the coming year.</p>
+	 * @return Holiday if New Years Eve is observed as a holiday date else null.
 	 */
 	private Holiday newYearsEveHoliday() {
 		// Create the next year value.
@@ -204,8 +204,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 
 	/**
 	 * <p>Provide a string array all holidays sorted by date in ascending order.</p>
-	 * 
-	 * @return String[] - format "<Date: format "EEEEE MM-dd-yyyy"> <Holiday Enum> <Holiday Name> <Observable flag>"
+	 * @return String[] - format | Date: format "EEEEE MM-dd-yyyy" | Holiday Enum | Holiday Name | Observable flag
 	 */
 	public String[] toHolidays() {
 		// Create a holiday set that will be sorted by date, not by day.
@@ -230,7 +229,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 
 	/**
 	 * <p>Which holiday does the calendar date match?</p>
-	 * @param date
+	 * @param date to determine which holiday.
 	 * @return Holiday if date matches the holiday date else null.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */
@@ -258,7 +257,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	
 	/**
 	 * <p>Which holiday does the calendar date match?</p>
-	 * @param date
+	 * @param date to determine which holiday.
 	 * @return Holiday if date matches the holiday date else null.
 	 * @throws Exception if holiday list is empty or date is null.
 	 */

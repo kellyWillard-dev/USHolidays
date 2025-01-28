@@ -10,7 +10,6 @@
 		<junit-jupiter-api.version>5.10.0</junit-jupiter-api.version>
 		<maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>3.2.1</maven-surefire-plugin.version>
-		<spring-parent>3.2.2.RELEASE</spring-parent>
 		<spring-test-version>6.0.13</spring-test-version>
 	    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

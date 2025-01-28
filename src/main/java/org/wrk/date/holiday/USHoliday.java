@@ -80,8 +80,7 @@ public class USHoliday {
 	
 	/**
 	 * <p>constructor with parameter</p>
-	 * 
-	 * @param year
+	 * @param year specified as an int value greater than 0 and less than MAXIMUM_YEAR.
 	 */
 	public USHoliday(int year) {
 		this.setYear(year);
@@ -294,8 +293,8 @@ public class USHoliday {
 	
 	/**
 	 * <p>Remove the timestamp from the calendar date.</p> 
-	 * @param date
-	 * @return Calendar
+	 * @param date value containing a time stamp.
+	 * @return Calendar value with no time stamp.
 	 */
 	public Calendar deleteTimestamp(Calendar date) {
 		if(date != null) {
@@ -315,8 +314,8 @@ public class USHoliday {
 	
 	/**
 	 * <p>Remove the timestamp from the calendar date.</p>
-	 * @param date
-	 * @return Calendar
+	 * @param date value containing a time stamp.
+	 * @return Calendar value with no time stamp.
 	 */
 	public Calendar deleteTimestamp(Date date) {
 		Calendar now = Calendar.getInstance();
@@ -330,7 +329,7 @@ public class USHoliday {
 	
 	/**
 	 * <p>Get Christmas day.</p>
-	 * @return Calendar
+	 * @return Calendar value with no time stamp.
 	 */
 	public Calendar getChristmasDay() {
 		return this.calculateChristmasDay();
