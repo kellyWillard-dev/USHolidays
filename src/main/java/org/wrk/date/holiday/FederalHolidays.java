@@ -17,11 +17,11 @@ import java.util.stream.Stream;
  * <li>whichHoliday - will return the Holiday object if the specified date matches the holiday else null.<br/>
  * <h4>Observable values</h4>
  * <p>There are 5 holidays that may occur during a weekend and are adjusted to be observed either on the prior Friday or
- * the following Monday.<br/>
+ * the following Monday.<br/></p>
  * <li>saturdayObservable if set true indicates a holiday occurring on a Saturday will be observed on the prior Friday. 
  * <li>sundayObservable if set true indicates a holiday occurring on a Sunday will be observed on the following Monday.
- * <br/><br/>The Observable values <b><i>default to true</i></b>.  If set false, the holiday is not observed.<br/><br/>
- * </p>
+ * <br/><br/>
+ * <p>The Observable values <b><i>default to true</i></b>.  If set false, the holiday is not observed.</p><br/><br/>
  * @see org.wrk.date.holiday.Holiday
  * @see org.wrk.date.holiday.HolidayEnum
  * @see org.wrk.date.holiday.HolidayRules

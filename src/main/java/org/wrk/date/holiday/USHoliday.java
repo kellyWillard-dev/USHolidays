@@ -5,7 +5,6 @@ import java.util.Date;
 
 /**
  * <h3>USHoliday</h3>class calculates all U.S. federal holidays for a calendar year.
- * <p>
  * <table style="width:50%;">
  * 	<tr>
  * 		<th>Holiday</th>
@@ -56,7 +55,6 @@ import java.util.Date;
  *		<td align="center">November 11th</td>
  *	</tr>
  * </table>
- * </p>
  * @author Kelly Willard
  */
 public class USHoliday {

@@ -17,11 +17,7 @@ package org.wrk.date.holiday;
  * <li>THANKSGIVING_DAY
  * <li>VETERANS_DAY
  * </p>
- * <p></p>
- * <p>
- * <b><i>Caveat</i></b><br/>
- * There is a possibility that NEW YEARS EVE may be recognized as a holiday.
- * <p/>
+ * <p><b><i>Caveat</i></b><br/>There is a possibility that NEW YEARS EVE may be recognized as a holiday.<p/>
  * @author Kelly Willard
  * @see org.wrk.date.holiday.USHoliday
  */

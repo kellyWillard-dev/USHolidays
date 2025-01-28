@@ -4,12 +4,9 @@ import java.util.Calendar;
 
 /**
  * <h3>Holiday</h3>class provides information of each federal holiday.
- * <p>
  * <li>date is the calendar date when the holiday occurs.
  * <li>day is the name of the holiday.
  * <li>observed flag indicates where the day is observed (true) or occurs on the actual day (false).
- * </p>
- * <p></p>
  * @author Kelly Willard
  */
 public class Holiday {
