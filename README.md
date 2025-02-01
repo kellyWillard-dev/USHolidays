@@ -1,8 +1,8 @@
 <html>
 <body>
-<h1>Holidays</h1>
+<h1>USHolidays</h1>
 <h2>Description</h2>
-<p>The Holidays API is designed to provide U.S holiday dates for any given year without using a database.</p>
+<p>The USHolidays API is designed to provide U.S holiday dates for any given year without using a database.</p>
 <h3>US Holidays</h3>
 <p>USHolidays class calculates all U.S. federal holidays for any given year.<br/></p>
 <h5>Methods</h5>
