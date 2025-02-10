@@ -6,12 +6,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * <h3>ObservedHolidays</h3>class extends the FederalHolidays class and provides the ability to not observe any of the U.S. federal holidays.
+ * <h1>ObservedHolidays</h1>class extends the FederalHolidays class and provides the ability to not observe any of the U.S. federal holidays.
  * <h4>Functionality</h4>
+ * <ul>
  * <li>holidayUnobserved - add a holiday to the unobserved set.
  * <li>isUnobserved - returns true if the holiday has been made unobserved else false.
+ * </ul>
  * <br/><br/>
- * <h4>Unobserve Holiday</h4>
+ * <h4>Unobserved Holiday</h4>
  * <p>Remove a holiday from observance by specifying the name of the holiday to the <b><i>holidayUnobserved()</i></b> method.<br/>
  * The HolidayEnum Enumerations List provides all the valid holiday names.</p>
  * <br/>
@@ -122,7 +124,8 @@ final public class ObservedHolidays extends FederalHolidays implements Cloneable
 	}
 
 	/**
-	 * @param unobserved the unobserved to set
+	 * <p>The unobserved to set.</p>
+	 * @param unobserved Set.
 	 */
 	public void setUnobserved(Set<String> unobserved) {
 		if(unobserved != null) {

@@ -64,7 +64,7 @@ public class TestObservedHolidays {
 	
 	@Test
 	public void testIsUnobservedEmpty() {
-		assertFalse(this.getObservedHolidays().isUnobserved("LABOR_DAY"),"Labor day is observed.");
+		assertFalse(this.getObservedHolidays().isUnobserved("LABOR_DAY"),"Labor day is not observed.");
 	}
 	
 	@Test

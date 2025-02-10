@@ -5,9 +5,9 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
- * <h3>HolidayRules</h3>interface provides the U.S. federal holiday business rules and functionality.
+ * <h1>HolidayRules</h1>interface provides the U.S. federal holiday business rules and functionality.
  * <h4>Functionality</h4>
- * <li>createHoliday create a U.S. Holiday.
+ * <ul>
  * <li>isActualDay is the Holiday an actual holiday, meaning if can occur on any day of the week?
  * <li>isEnumeratedHoliday is the Holiday a valid holiday listed within HolidayEnum object?
  * <li>isMonday is the day Monday?
@@ -17,6 +17,7 @@ import java.util.stream.Stream;
  * <li>isSaturday does the date occur during Saturday?
  * <li>isSunday does the date occur during Sunday?
  * <li>isWeekend does the date occur during the weekend?
+ * </ul>
  * <br/>
  * <h4>Weekend Observable Rule</h4>
  * <p>Holidays may occur on the weekend.<br/>
@@ -32,47 +33,6 @@ import java.util.stream.Stream;
  * @author Kelly Willard
  */
 public interface HolidayRules {
-	
-	/**
-	 * <p>Create a holiday object from the calendar date and the holiday enumeration.</p>
-	 * <p>Because there are 5 actual holidays (meaning they can occur on any day of the week)<br/>
-	 * the observed flag is set to false, indicating actual day.</p>
-	 * <p>Observable holidays indicate whether or not to observe a holiday on another day if it occurs on a weekend.<br/>
-	 * Traditionally, Saturday holidays observe on the prior Friday and Sunday holidays on the following Monday.</p>
-	 * @param date value for the created Holiday.
-	 * @param day HolidayEnum value for the created Holiday.
-	 * @return Holiday if valid parameters exist else null.
-	 */
-	default public Holiday createHoliday(Calendar date, HolidayEnum day) {
-		Holiday holiday = null;
-		
-		if(date != null && day != null && this.isEnumeratedHoliday(day)) {
-			holiday = new Holiday();
-			// If the date occurs on a weekend, it's an actual holiday.						
-			if(this.isWeekEnd(date)) {
-				if(this.isObservableOnSaturday(date)) {
-					// Observe the actual holiday on Friday.
-					date.add(Calendar.DAY_OF_MONTH, -1);
-				}
-				else if(this.isObservableOnSunday(date)) {
-					// Observe the actual holiday on Monday.
-					date.add(Calendar.DAY_OF_MONTH, 1);
-				}
-				else if(isActualDay(day)) {
-					// Flag date as an actual holiday.
-					holiday.setObserved(false);
-				}
-			}
-			else if(isActualDay(day)) {
-				holiday.setObserved(false);
-			}
-			
-			holiday.setDate(date);
-			holiday.setDay(day);
-		}
-		
-		return holiday;
-	}
 	
 	/**
 	 * <p>Is the day an actual holiday?<br/>An actual holiday can occur any day of the week.</p>

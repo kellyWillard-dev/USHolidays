@@ -10,26 +10,31 @@ import java.util.TreeSet;
 import java.util.stream.Stream;
 
 /**
- * <h3>FederalHolidays</h3>class extends USHoliday and provides U.S. federal holiday functionality.
+ * <h1>FederalHolidays</h1>class extends USHoliday and provides U.S. federal holiday functionality.
  * <h4>Functionality</h4>
+ * <ul>
  * <li>isHoliday - will return true if the specified date is a holiday else false.
  * <li>toHolidays - provides a String array of holidays observed during the year.
  * <li>whichHoliday - will return the Holiday object if the specified date matches the holiday else null.<br/>
+ * </ul>
  * <h4>Observable values</h4>
  * <p>There are 5 holidays that may occur during a weekend and are adjusted to be observed either on the prior Friday or
  * the following Monday.<br/></p>
+ * <ul>
  * <li>saturdayObservable if set true indicates a holiday occurring on a Saturday will be observed on the prior Friday. 
  * <li>sundayObservable if set true indicates a holiday occurring on a Sunday will be observed on the following Monday.
+ * </ul>
  * <br/><br/>
  * <p>The Observable values <b><i>default to true</i></b>.  If set false, the holiday is not observed.</p><br/><br/>
  * @see org.wrk.date.holiday.Holiday
  * @see org.wrk.date.holiday.HolidayEnum
  * @see org.wrk.date.holiday.HolidayRules
+ * @see org.wrk.date.holiday.Holidays
  * @see org.wrk.date.holiday.USHoliday
  * 
  * @author Kelly Willard
  */
-public class FederalHolidays extends USHoliday implements HolidayRules {
+public class FederalHolidays extends USHoliday implements Holidays, HolidayRules {
 	private SortedSet<Holiday> holidaySet = new TreeSet<>(Comparator.comparing(Holiday::getDay));
 	
 	private boolean saturdayObservable = true;
@@ -49,6 +54,47 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	public FederalHolidays(int year) {
 		super(year);
 	}
+	
+	/**
+	 * <p>Create a holiday object from the calendar date and the holiday enumeration.</p>
+	 * <p>Because there are 5 actual holidays (meaning they can occur on any day of the week)<br/>
+	 * the observed flag is set to false, indicating actual day.</p>
+	 * <p>Observable holidays indicate whether or not to observe a holiday on another day if it occurs on a weekend.<br/>
+	 * Traditionally, Saturday holidays observe on the prior Friday and Sunday holidays on the following Monday.</p>
+	 * @param date value for the created Holiday.
+	 * @param day HolidayEnum value for the created Holiday.
+	 * @return Holiday if valid parameters exist else null.
+	 */
+	private Holiday createHoliday(Calendar date, HolidayEnum day) {
+		Holiday holiday = null;
+		
+		if(date != null && day != null && this.isEnumeratedHoliday(day)) {
+			holiday = new Holiday();
+			// If the date occurs on a weekend, it's an actual holiday.						
+			if(this.isWeekEnd(date)) {
+				if(this.isObservableOnSaturday(date)) {
+					// Observe the actual holiday on Friday.
+					date.add(Calendar.DAY_OF_MONTH, -1);
+				}
+				else if(this.isObservableOnSunday(date)) {
+					// Observe the actual holiday on Monday.
+					date.add(Calendar.DAY_OF_MONTH, 1);
+				}
+				else if(isActualDay(day)) {
+					// Flag date as an actual holiday.
+					holiday.setObserved(false);
+				}
+			}
+			else if(isActualDay(day)) {
+				holiday.setObserved(false);
+			}
+			
+			holiday.setDate(date);
+			holiday.setDay(day);
+		}
+		
+		return holiday;
+	}
 
 	/**
 	 * @return holidaySet as a SortedSet.
@@ -59,9 +105,11 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 	
 	/**
 	 * <p>Initialize the FederalHolidays class.</p>
+	 * <ul>
 	 * <li>Calls the loadHolidays method.
 	 * <li>Call this method after instantiating this class.
 	 * <li>Call this method within an init-method setting for dependency injection.
+	 * </ul>
 	 */
 	public void init() {
 		this.loadHolidays();
@@ -165,7 +213,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 		// Create the next year value.
 		int nextYear = this.getYear() + 1;
 		
-		// Instantiate the object with next year value.
+		// Instantiate the USHoliday object with next year value.
 		USHoliday usHoliday = new USHoliday(nextYear);
 		
 		// Create the next new years day holiday.
@@ -177,7 +225,7 @@ public class FederalHolidays extends USHoliday implements HolidayRules {
 			newYearsEve.setDay(HolidayEnum.NEWYEARS_EVE);
 		}
 		else {
-			// Not New Years Eve.
+			// Either not New Years Eve or not observed.
 			newYearsEve = null;
 		}
 		
