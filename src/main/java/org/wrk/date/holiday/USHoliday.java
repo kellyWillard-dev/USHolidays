@@ -4,8 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * <h3>USHoliday</h3>class calculates all U.S. federal holidays for a calendar year.
+ * <h1>USHoliday</h1>class calculates all U.S. federal holidays for a calendar year.
  * <table style="width:50%;">
+ * 	<caption><b>United States Federal Holidays</b></caption>
  * 	<tr>
  * 		<th>Holiday</th>
  * 		<th>Occurs</th>
@@ -59,6 +60,7 @@ import java.util.Date;
  */
 public class USHoliday {
 
+	// MAXIMUM_YEAR is the maximum year allowed by the Calendar object.
 	protected final int MAXIMUM_YEAR = Calendar.getInstance().getActualMaximum(Calendar.YEAR);
 	
 	private final int NEXT = 1;

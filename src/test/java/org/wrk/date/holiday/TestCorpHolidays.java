@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,6 +24,9 @@ public class TestCorpHolidays {
 
 	@Autowired
 	private ObservedHolidays corpHolidays;
+	
+	@Resource
+	private Set<String> corpUnobservedHolidays;
 
 	//  Time stamp:  HH:mm:SS
 	private SimpleDateFormat sdf = new SimpleDateFormat("EEEEE MMMMM dd yyyy");
@@ -106,6 +112,15 @@ public class TestCorpHolidays {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
+	}
+	
+	@Test
+	void testToHolidays() {
+		FederalHolidays federalHolidays = new FederalHolidays();
+		
+		federalHolidays.init();
+		
+		assertTrue(this.getCorpHolidays().toHolidays().length == (federalHolidays.toHolidays().length - corpUnobservedHolidays.size()),"Holiday lengths are incorrect.");
 	}
 	
 	@Test

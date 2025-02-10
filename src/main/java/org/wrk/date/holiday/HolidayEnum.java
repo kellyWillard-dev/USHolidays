@@ -1,9 +1,9 @@
 package org.wrk.date.holiday;
 
 /**
- * <h3>HolidayEnum</h3>enumerated U.S federal holidays.
+ * <h1>HolidayEnum</h1>enumerated U.S federal holidays.
  * <h4>Enumerations List</h4>
- * <p>
+ * <ul>
  * <li>CHRISTMAS_DAY
  * <li>COLUMBUS_DAY
  * <li>INDEPENDENCE_DAY
@@ -16,8 +16,8 @@ package org.wrk.date.holiday;
  * <li>PRESIDENTS_DAY
  * <li>THANKSGIVING_DAY
  * <li>VETERANS_DAY
- * </p>
- * <p><b><i>Caveat</i></b><br/>There is a possibility that NEW YEARS EVE may be recognized as a holiday.<p/>
+ * </ul>
+ * <p><b><i>Caveat</i></b><br/>There is a possibility that NEW YEARS EVE may be recognized as a holiday.</p>
  * @author Kelly Willard
  * @see org.wrk.date.holiday.USHoliday
  */
