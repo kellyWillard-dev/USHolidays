@@ -152,7 +152,7 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 	}
 
 	/**
-	 * <p>Calculate all federal holidays for the year and loads them into the holiday set.</p>
+	 * <p>Calculate all federal holidays for the year and load them into the holiday set.</p>
 	 */
 	private void loadHolidays() {
 		Stream.of(HolidayEnum.values()).forEach(it -> {
@@ -217,19 +217,10 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 		USHoliday usHoliday = new USHoliday(nextYear);
 		
 		// Create the next new years day holiday.
-		Holiday newYearsEve = this.createHoliday(usHoliday.getNewYearsDay(), HolidayEnum.NEWYEARS_DAY);
+		Holiday newYearsEve = this.createHoliday(usHoliday.getNewYearsDay(), HolidayEnum.NEWYEARS_EVE);
 		
-		// Is the holiday the last day of the current year?
-		if(this.isNewYearsEve(newYearsEve)) {
-			// Change the holiday enumeration type.
-			newYearsEve.setDay(HolidayEnum.NEWYEARS_EVE);
-		}
-		else {
-			// Either not New Years Eve or not observed.
-			newYearsEve = null;
-		}
-		
-		return newYearsEve;
+		// If New Years Eve, return holiday else null.
+		return this.isNewYearsEve(newYearsEve) ? newYearsEve : null;
 	}
 
 	/**
@@ -256,19 +247,19 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 	 */
 	public String[] toHolidays() {
 		// Create a holiday set that will be sorted by date, not by day.
-		SortedSet<Holiday> holidaySet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
+		SortedSet<Holiday> toSet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
 		
 		// Add the holidays to the new tree set.
-		this.getHolidaySet().forEach(it -> holidaySet.add(it));
+		this.getHolidaySet().forEach(it -> toSet.add(it));
 		
-		String[] result = new String[holidaySet.size()];
+		String[] result = new String[toSet.size()];
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEEE MM-dd-yyyy");
 
 		// Iteration counter.
 		int index = 0;
 		
-		for(Holiday holiday : holidaySet) {
+		for(Holiday holiday : toSet) {
 			result[index++] = String.format("%s,%s,%s%s",sdf.format(holiday.getDate().getTime()), holiday.getDay().name(), holiday.getDay().getHolidayName(), (holiday.isObserved() ? ",observed" : ""));
 		}
 		
