@@ -247,19 +247,19 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 	 */
 	public String[] toHolidays() {
 		// Create a holiday set that will be sorted by date, not by day.
-		SortedSet<Holiday> toSet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
+		SortedSet<Holiday> treeSet = new TreeSet<>(Comparator.comparing(Holiday::getDate));
 		
 		// Add the holidays to the new tree set.
-		this.getHolidaySet().forEach(it -> toSet.add(it));
+		this.getHolidaySet().forEach(it -> treeSet.add(it));
 		
-		String[] result = new String[toSet.size()];
+		String[] result = new String[treeSet.size()];
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("EEEEE MM-dd-yyyy");
 
 		// Iteration counter.
 		int index = 0;
 		
-		for(Holiday holiday : toSet) {
+		for(Holiday holiday : treeSet) {
 			result[index++] = String.format("%s,%s,%s%s",sdf.format(holiday.getDate().getTime()), holiday.getDay().name(), holiday.getDay().getHolidayName(), (holiday.isObserved() ? ",observed" : ""));
 		}
 		
