@@ -428,12 +428,6 @@ public class USHoliday {
 	 * @param year the year to set
 	 */
 	protected void setYear(int year) {
-		if(0 < year && year < MAXIMUM_YEAR) {
-			this.year = year;
-		}
-		else {
-			// Set year to the current calendar year.
-			this.year = Calendar.getInstance().get(Calendar.YEAR);
-		}
+		this.year = 0 < year && year < MAXIMUM_YEAR ? year : Calendar.getInstance().get(Calendar.YEAR);
 	}
 }
