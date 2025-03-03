@@ -6,7 +6,7 @@ import java.util.Calendar;
  * <h1>HolidayRules</h1>interface provides the U.S. federal holiday business rules and functionality.
  * <h4>Functionality</h4>
  * <ul>
- * <li>isActualDay is the Holiday an actual holiday, meaning if can occur on any day of the week?
+ * <li>isActualDay is the Holiday an actual holiday, meaning if it can occur on any day of the week?
  * <li>isNewYearsEve is the date New Years Eve?
  * <li>isObservableOnSaturday is the holiday observable on a Saturday?
  * <li>isObservableOnSunday is the holiday observable on a Sunday?

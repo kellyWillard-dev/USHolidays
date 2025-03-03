@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -223,6 +224,29 @@ public class TestFederalHolidays {
 	
 	@Test
 	public void testNewYearsDay() {
+		assertDoesNotThrow((() -> this.getFederalHolidays().isHoliday(this.getFederalHolidays().getNewYearsDay())),"New Years day not observed.");
+		
+		try {
+			assertTrue(this.getFederalHolidays().isHoliday(this.getFederalHolidays().getNewYearsDay()),"New Years day not observed.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testNewYearsDayMonday() {
+		Calendar today = Calendar.getInstance();
+		
+		int iyear = 2023;
+		
+		today.set(iyear,Calendar.JANUARY,1);
+		
+		FederalHolidays federalHolidays = new FederalHolidays(iyear);
+		
+		federalHolidays.init();
+		
+//		Stream.of(federalHolidays.toHolidays()).forEach(it -> System.out.println(it));
+		
 		assertDoesNotThrow((() -> this.getFederalHolidays().isHoliday(this.getFederalHolidays().getNewYearsDay())),"New Years day not observed.");
 		
 		try {
