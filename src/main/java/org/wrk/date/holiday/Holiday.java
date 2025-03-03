@@ -3,12 +3,13 @@ package org.wrk.date.holiday;
 import java.util.Calendar;
 
 /**
- * <h3>Holiday</h3>class provides information of each federal holiday.
- * <ul>
+ * <h1>Holiday</1>class provides information of each federal holiday.
+ * <hr>
+ * <h3>Elements</3>
  * <li>date is the calendar date when the holiday occurs.
  * <li>day is the name of the holiday.
  * <li>observed flag indicates where the day is observed (true) or occurs on the actual day (false).
- * </ul>
+ * <br/><br/>
  * @author Kelly Willard
  */
 public class Holiday {
@@ -26,21 +27,21 @@ public class Holiday {
 	}
 
 	/**
-	 * @return the date
+	 * @return Calendar date of holiday
 	 */
 	public Calendar getDate() {
 		return date;
 	}
 
 	/**
-	 * @return the day
+	 * @return HolidayEnum day name of holiday
 	 */
 	public HolidayEnum getDay() {
 		return day;
 	}
 
 	/**
-	 * @return the observed
+	 * @return boolean observed flag true if observed else false if actual day.
 	 */
 	public boolean isObserved() {
 		return observed;

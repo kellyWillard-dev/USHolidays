@@ -1,17 +1,13 @@
 package org.wrk.date.holiday;
 
 import java.util.Calendar;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * <h1>HolidayRules</h1>interface provides the U.S. federal holiday business rules and functionality.
  * <h4>Functionality</h4>
  * <ul>
  * <li>isActualDay is the Holiday an actual holiday, meaning if can occur on any day of the week?
- * <li>isEnumeratedHoliday is the Holiday a valid holiday listed within HolidayEnum object?
- * <li>isMonday is the day Monday?
- * <li>isNewYearsEve is the day New Years Eve?
+ * <li>isNewYearsEve is the date New Years Eve?
  * <li>isObservableOnSaturday is the holiday observable on a Saturday?
  * <li>isObservableOnSunday is the holiday observable on a Sunday?
  * <li>isSaturday does the date occur during Saturday?
@@ -44,32 +40,12 @@ public interface HolidayRules {
 	}
 	
 	/**
-	 * <p>Is the day a valid enumerated holiday?</p>
-	 * @param day HolidayEnum value.
-	 * @return boolean true if day is within the HolidayEnum list else false.
-	 */
-	default public boolean isEnumeratedHoliday(HolidayEnum day) {
-		Optional<HolidayEnum> holiday = day != null ? Stream.of(HolidayEnum.values()).filter(it -> it == day).findFirst() : Optional.empty();
-		
-		return holiday.isPresent();
-	}
-	
-	/**
-	 * <p>Is the date Monday</p>
-	 * @param date value to be determined.
-	 * @return boolean true if date is Monday else false.
-	 */
-	default public boolean isMonday(Calendar date) {
-		return date != null ? date.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY : false;
-	}
-	
-	/**
 	 * <p>Does the date occur on New Years Eve?</p>
-	 * @param newYearsEve Holiday containing the date value to check.
+	 * @param date value to check.
 	 * @return boolean true if date is New Years Eve else false.
 	 */
-	default public boolean isNewYearsEve(Holiday newYearsEve) {
-		return newYearsEve != null && newYearsEve.getDate() != null ? newYearsEve.getDate().get(Calendar.MONTH) == Calendar.DECEMBER && newYearsEve.getDate().get(Calendar.DAY_OF_MONTH) == 31 : false;		
+	default public boolean isNewYearsEve(Calendar date) {
+		return date != null ? date.get(Calendar.MONTH) == Calendar.DECEMBER && date.get(Calendar.DAY_OF_MONTH) == 31 : false;		
 	}
 	
 	/**

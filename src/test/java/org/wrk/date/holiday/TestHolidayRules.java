@@ -39,18 +39,6 @@ class TestHolidayRules {
 	}
 	
 	@Test
-	void testIsEnumeratedHoliday() {
-		assertTrue(frbHolidays.isEnumeratedHoliday(HolidayEnum.VETERANS_DAY), "Veterans day is not a enumerated holiday.");
-	}
-	
-	@Test
-	void testIsMonday() {
-		Calendar today = this.createDayOfWeek(Calendar.getInstance(), Calendar.MONDAY);
-		
-		assertTrue(frbHolidays.isMonday(today), "Today is not Monday.");
-	}
-	
-	@Test
 	void testIsNewYearsEve() {
 		USHoliday h = new USHoliday(2022);
 		
@@ -62,19 +50,12 @@ class TestHolidayRules {
 		newYearsEve.setDate(today);
 		newYearsEve.setDay(HolidayEnum.NEWYEARS_EVE);
 		
-		assertTrue(frbHolidays.isNewYearsEve(newYearsEve), "Today is not New Years Eve.");		
+		assertTrue(frbHolidays.isNewYearsEve(newYearsEve.getDate()), "Today is not New Years Eve.");		
 	}	
 	
 	@Test
 	void testIsNotActualHoliday() {
 		assertFalse(frbHolidays.isActualDay(HolidayEnum.MARTINLUTHERKINGJR_DAY), "MARTIN LUTHER KING JR day is actual holiday.");
-	}
-	
-	@Test
-	void testIsNotMonday() {
-		Calendar today = this.createDayOfWeek(Calendar.getInstance(), Calendar.FRIDAY);
-		
-		assertFalse(frbHolidays.isMonday(today), "Today is Monday.");
 	}
 	
 	@Test
@@ -89,7 +70,7 @@ class TestHolidayRules {
 		newYearsEve.setDate(today);
 		newYearsEve.setDay(HolidayEnum.NEWYEARS_EVE);
 		
-		assertFalse(frbHolidays.isNewYearsEve(newYearsEve), "Today is New Years Eve.");		
+		assertFalse(frbHolidays.isNewYearsEve(newYearsEve.getDate()), "Today is New Years Eve.");		
 	}	
 	
 	@Test

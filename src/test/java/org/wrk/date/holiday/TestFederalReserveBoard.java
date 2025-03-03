@@ -1,6 +1,6 @@
 package org.wrk.date.holiday;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
 import java.util.stream.Stream;
@@ -52,6 +52,8 @@ class TestFederalReserveBoard {
 		FederalHolidays federalHolidays = new FederalHolidays(iyear);
 		
 		federalHolidays.init();
+		
+//		Stream.of(federalHolidays.toHolidays()).forEach(it -> System.out.println(it));
 		
 		try {
 			// The holiday should be observed. NewYearsEve is on a Friday.

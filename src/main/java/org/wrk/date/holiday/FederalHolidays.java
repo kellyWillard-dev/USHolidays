@@ -64,29 +64,28 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 	 * @param date value for the created Holiday.
 	 * @param day HolidayEnum value for the created Holiday.
 	 * @return Holiday if valid parameters exist else null.
-	 */
+	 */	
 	private Holiday createHoliday(Calendar date, HolidayEnum day) {
 		Holiday holiday = null;
 		
-		if(date != null && day != null && this.isEnumeratedHoliday(day)) {
+		if(date != null && day != null) {
 			holiday = new Holiday();
-			// If the date occurs on a weekend, it's an actual holiday.						
-			if(this.isWeekEnd(date)) {
-				if(this.isObservableOnSaturday(date)) {
-					// Observe the actual holiday on Friday.
-					date.add(Calendar.DAY_OF_MONTH, -1);
+
+			if(this.isActualDay(day)) {
+				boolean observable = false;
+				
+				if(this.isWeekEnd(date)) {
+					if(observable = this.isObservableOnSaturday(date)) {
+						// Observe the actual holiday on Friday.
+						date.add(Calendar.DAY_OF_MONTH, -1);
+					}
+					else if(observable = this.isObservableOnSunday(date)) {
+						// Observe the actual holiday on Monday.
+						date.add(Calendar.DAY_OF_MONTH, 1);
+					}
 				}
-				else if(this.isObservableOnSunday(date)) {
-					// Observe the actual holiday on Monday.
-					date.add(Calendar.DAY_OF_MONTH, 1);
-				}
-				else if(isActualDay(day)) {
-					// Flag date as an actual holiday.
-					holiday.setObserved(false);
-				}
-			}
-			else if(isActualDay(day)) {
-				holiday.setObserved(false);
+				
+				holiday.setObserved(observable);
 			}
 			
 			holiday.setDate(date);
@@ -217,10 +216,16 @@ public class FederalHolidays extends USHoliday implements Holidays, HolidayRules
 		USHoliday usHoliday = new USHoliday(nextYear);
 		
 		// Create the next new years day holiday.
-		Holiday newYearsEve = this.createHoliday(usHoliday.getNewYearsDay(), HolidayEnum.NEWYEARS_EVE);
+		Holiday newYearsEve = this.createHoliday(usHoliday.getNewYearsDay(), HolidayEnum.NEWYEARS_DAY);
+		
+		// Was the holiday created?
+		if(newYearsEve != null) {
+			// Switch day to New Years Eve.
+			newYearsEve.setDay(HolidayEnum.NEWYEARS_EVE);
+		}
 		
 		// If New Years Eve, return holiday else null.
-		return this.isNewYearsEve(newYearsEve) ? newYearsEve : null;
+		return this.isNewYearsEve(newYearsEve.getDate()) ? newYearsEve : null;
 	}
 
 	/**
