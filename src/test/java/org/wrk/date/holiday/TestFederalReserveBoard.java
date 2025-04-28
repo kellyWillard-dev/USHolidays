@@ -3,7 +3,6 @@ package org.wrk.date.holiday;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Calendar;
-import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
